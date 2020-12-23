@@ -16,9 +16,11 @@
         "DSW Dashboards": "http://localhost:${port}/dsw/index.html#/IRISAPP/",
         "Dashboards Portal": "http://localhost:${port}/csp/irisapp/_DeepSee.UserPortal.Home.zen",
         "Analyzer": "http://localhost:${port}/csp/irisapp/_DeepSee.UserPortal.Analyzer.zen",
-        "Architect":"http://localhost:${port}/csp/irisapp/_DeepSee.UI.Architect.zen?$NAMESPACE=IRISAPP"
-        
-    }
+        "Architect": "http://localhost:${port}/csp/irisapp/_DeepSee.UI.Architect.zen?$NAMESPACE=IRISAPP",
+        "Analytics": "http://localhost:${port}/csp/irisapp/analytics.csp"
+      },
+      "active": true,
+      "server": "default~iris"
     },
     "sqltools.connections": [
       {
@@ -27,13 +29,30 @@
         "showSystem": false,
         "previewLimit": 50,
         "server": "localhost",
-        "port": 32791,
+        "port": 57772,
         "askForPassword": false,
         "driver": "InterSystems IRIS",
         "name": "iris",
         "username": "_SYSTEM",
         "password": "SYS"
       }
-    ]
+    ],
+    "workbench.colorCustomizations": {
+      "activityBar.activeBackground": "#1f6fd0",
+      "activityBar.activeBorder": "#ee90bb",
+      "activityBar.background": "#1f6fd0",
+      "activityBar.foreground": "#e7e7e7",
+      "activityBar.inactiveForeground": "#e7e7e799",
+      "activityBarBadge.background": "#ee90bb",
+      "activityBarBadge.foreground": "#15202b",
+      "statusBar.background": "#1857a4",
+      "statusBar.foreground": "#e7e7e7",
+      "statusBarItem.hoverBackground": "#1f6fd0",
+      "titleBar.activeBackground": "#1857a4",
+      "titleBar.activeForeground": "#e7e7e7",
+      "titleBar.inactiveBackground": "#1857a499",
+      "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#1857a4"
 
 }
