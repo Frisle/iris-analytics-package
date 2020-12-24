@@ -35,7 +35,7 @@
           </a>
           <ul class="navbar-nav mr-auto mt-2 mt-md-0">
             <li class="nav-item active">
-              <a class="nav-link" href="layout-blank.html">Import Wizard <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="analytics.csp">Import Wizard <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../../dsw/index.html#/IRISAPP" target="_blank">DSW</a>
@@ -113,7 +113,7 @@
                           <div class="form-group">
                             <!-- .custom-control -->
                             <div class="custom-control custom-checkbox">
-                              <input type="checkbox" id="generateDash" name="generateDash" class="custom-control-input" data-parsley-group="generateDash" required="">
+                              <input type="checkbox" id="generateDash" name="generateDash" class="custom-control-input" data-parsley-group="generateDash">
                               <label class="custom-control-label" for="generateDash">Generate a sample dashboard?</label>
                             </div><!-- /.custom-control -->
                           </div><!-- /.form-group -->
@@ -132,14 +132,15 @@
                         Mime Section: <b>#(..EscapeHTML(%request.MimeData("FileStream",1).MimeSection))#</b><br>
                         Type of stream: <b>#(..EscapeHTML($classname(%request.MimeData("FileStream",1))))#</b><br>
                         Content Type: <b>#(..EscapeHTML(%request.MimeData("FileStream",1).ContentType))#</b><br>
-                        ClassName : <b>#(..EscapeHTML(%request.Data("className",1)))#</b><br>
+                        Class Name : <b>#(..EscapeHTML(%request.Data("className",1)))#</b><br>
+                        Cube Name : <b>#(..EscapeHTML(%request.Data("cubeName",1)))#</b><br>
 
                         <script language="Cache" runat="server">
                           new stream, tSeparator, tSourceClass, tCreateCube, tCubeClass, tCubeName, tGenerateDash
                           set (stream, tSeparator, tSourceClass, tCreateCube, tCubeClass, tCubeName, tGenerateDash)=""
 
                           set stream = %request.GetMimeData("FileStream")
-                          set tSeparator = $get(%request.Data("className",1))
+                          set tSeparator = $get(%request.Data("separator",1))
                           if (tSeparator = "") {
                             set tSeparator = ","
                           }
@@ -157,15 +158,24 @@
 
                           if (tCreateCube'="") {
                             set tCubeClass=tSourceClass_"Cube"
-                            do ##class(%DeepSee.WizardUtils).%GenerateCubeDefinition(tSourceClass,tCubeName,tCubeClass)
-                            do $System.OBJ.Compile(tCubeClass,"fck /displayerror=0 /displaylog=0")
-                            do ##class(%DeepSee.Utils).%BuildCube(tCubeName)
-                          }
+                            set st = ##class(%DeepSee.WizardUtils).%GenerateCubeDefinition(tSourceClass,tCubeName,tCubeClass)
 
-                          if (tGenerateDash'="") {
-                            do ##class(AnalyzeThis.Generator).GenerateDash(tCubeName) 
-                          }
+                            if $$$ISOK(st) {
+                              set st = $System.OBJ.Compile(tCubeClass,"fck /displayerror=0 /displaylog=0")
+                              
+                              if $$$ISOK(st) {
+                                set st = ##class(%DeepSee.Utils).%BuildCube(tCubeName,,0)
 
+                                if $$$ISOK(st) {
+                                  if (tGenerateDash'="") {
+                                    set st = ##class(AnalyzeThis.Generator).GenerateDash(tCubeName) 
+
+                                    &SQL(GRANT Select ON * TO UnknownUser)
+                                  }
+                                }
+                              }
+                            }
+                          }
                         </script>
                         </ul>
                       </csp:if>
