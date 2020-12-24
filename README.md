@@ -1,21 +1,22 @@
-# iris-analytics-template
-This is a template for InterSystems IRIS Analytics (DeepSee) solutions.
-The template contains a very basic example of the BI solution which contains one source class, data, one cube, two pivots and one dashboard.
+# iris-analytics-package
+This project has the intention to show a basic approach using the Analytics capabilities of InterSystems IRIS
 
-## Installation 
+Especially for those who already using InterSystems IRIS, but without taking advantage of Analytics. The idea is to prove how simple it is.
+
+## Installation
 
 ### ZPM
 It's packaged with ZPM so it could be installed as:
 ```
-zpm "install iris-analytics-sample"
+zpm "install iris-analytics-package"
 ```
-then open http://localhost:32791/dsw/index.html#/IRISAPP
+then open http://localhost:52773/csp/irisapp/analytics.csp
 
 ### Docker
 The repo is dockerised so you can  clone/git pull the repo into any local directory
 
 ```
-$ git clone https://github.com/intersystems-community/iris-analytics-template.git
+$ git clone https://github.com/diashenrique/iris-analytics-package.git
 ```
 
 Open the terminal in this directory and run:
@@ -23,75 +24,54 @@ Open the terminal in this directory and run:
 ```
 $ docker-compose up -d
 ```
-and open then http://localhost:32791/dsw/index.html#/IRISAPP
+and open then http://localhost:52773/csp/irisapp/analytics.csp
 
 Or, open the cloned folder in VSCode, start docker-compose and open the URL via VSCode menu:
-<img width="799" alt="Screenshot 2020-11-15 at 20 17 12" src="https://user-images.githubusercontent.com/2781759/99191744-ba02af00-277f-11eb-8568-e43aa9a0029c.png">
+![](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/vscodeLinks.png)
 
+## The purpose of this project
 
-## How to start coding
-### Prerequisites
-Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [Docker desktop](https://www.docker.com/products/docker-desktop) installed.
+The iris-analytics-package has the intention to demonstrate how easy and simple companies can take advantage of InterSystems Analytics support in their software. Whether creating new simple solutions or even using OpenExchange to improve existing ones.
 
-This repository is ready to code in VSCode with ObjectScript plugin.
-Install [VSCode](https://code.visualstudio.com/), [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) and [ObjectScript](https://marketplace.visualstudio.com/items?itemName=daimor.vscode-objectscript) plugin and open the folder in VSCode.
-Open /src/cls/PackageSample/ObjectScript.cls class and try to make changes - it will be compiled in running IRIS docker container.
-![docker_compose](https://user-images.githubusercontent.com/2781759/87149599-3c063700-c2b9-11ea-9250-9b5d42ec4932.gif)
+## How this project was created
 
-[Read more about folder setup for InterSystems ObjectScript](https://community.intersystems.com/post/simplified-objectscript-source-folder-structure-package-manager)
+This project was created using other projects as a base and inspiration. Thanks to @intersystems-community @evshvarov @grongierisc @psteiwer
 
-The script in Installer.cls will import everything you place under /src into IRIS.
+The projects are:
 
-## How this sample was created
+- [DeepSeeWeb](https://github.com/intersystems-community/DeepSeeWeb)
+- [csvgen](https://github.com/evshvarov/csvgen) 
+- [csvgen-ui](https://github.com/grongierisc/iris-csvgen-ui)
+- [AnalyzeThis](https://github.com/psteiwer/AnalyzeThis)
 
-The class and data were taken from covid19 CSV [Johns Hopkins repository](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports).
+Those projects together became this humble wizard.
+![Fuuuuuuuusion](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/fusion.gif)
 
-zpm "install csvgen" will import csvgen package which lets to create class and import data with the following line:
-```
-set file="https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/11-14-2020.csv"
-zw ##class(community.csvgen).GenerateFromURL(file,",","dc.irisbi.covid19")
-```
-The cube was generated from with:
-```
-zw ##class(%DeepSee.WizardUtils).%GenerateCubeDefinition("dc.irisbi.covid19","CovidCube","dc.irisbi.covid19cube",1)
-```
+## Import Wizard
 
-### Deployment
-To deploy this project via ZPM or docker we need:
-classes, data and DFI.
-Cube class [dc.irisbi.Covid19Cube.cls](https://github.com/intersystems-community/iris-analytics-template/blob/438c93f67e9a6f55d6a5598b8d3f4b9ca0fc8634/src/dc/irisbi/covid19cube.cls) was exported manually via Server view in VSCode.
+The main csp page looks simples, and the process involved is straightforward.
 
+![](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/importWizard.png)
 
+There a few fields to use the Wizard properly:
 
-[Pivots and dashboard](https://github.com/intersystems-community/iris-analytics-template/blob/438c93f67e9a6f55d6a5598b8d3f4b9ca0fc8634/src/dfi/Covid19/)  were created manually and then were exported with isc dev to the format, which standard import procedures and ZPM can import:
-```
-zpm "install isc-dev"
-do ##class(dev.code).workdir("/irisdev/app/src")
-d ##class(dev.code).export("*.DFI")
-```
-And [data](https://github.com/intersystems-community/iris-analytics-template/blob/438c93f67e9a6f55d6a5598b8d3f4b9ca0fc8634/src/gbl/dc.irisbi.covid19D.xml) was exported via standard export utility:
-```
-do $System.OBJ.Export("dc*.GBL","/irisdev/app/src/gbl/dc.irisbi.covid19D.xml",,.errors)
-```
+1. Choose your CSV file
+2. Separator
+3. Class Name
+4. Choose if you want to create a Cube or not
+5. Cube Name
+6. Choose if the wizard should create a dashboard sample
 
-after that ZPM module.xml was created manually which includes classes, DFI, global and calls %DeepSee.Utils("Covid19Cube") to build the cube data.
+### Visualizing the dashboard
 
+O link DSW abre em uma nova aba o DeepSeeWeb. Prety simple, right?!
 
+### Demo
 
-## What's inside the repository
+The gif below shows the whole process. After the upload button was clicked, The gif could look frozen, but it's because we have many records there. The selected CSV file has more than 15Mb, and import 134.100 registers!
 
-### Dockerfile
+BTW, the dataset for this demo came from [The Humanitarian Data Exchange - Find, share and use humanitarian data all in one place](https://data.humdata.org/)
 
-The simplest dockerfile which starts IRIS and imports Installer.cls and then runs the Installer.setup method, which creates IRISAPP Namespace and imports ObjectScript code from /src folder into it.
-Use the related docker-compose.yml to easily setup additional parametes like port number and where you map keys and host folders.
-Use .env/ file to adjust the dockerfile being used in docker-compose.
+![Import Wizard in action!](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/importWizard.gif)
 
-
-### .vscode/settings.json
-
-Settings file to let you immedietly code in VSCode with [VSCode ObjectScript plugin](https://marketplace.visualstudio.com/items?itemName=daimor.vscode-objectscript))
-
-### .vscode/launch.json
-Config file if you want to debug with VSCode ObjectScript
-
-[Read about all the files in this article](https://community.intersystems.com/post/dockerfile-and-friends-or-how-run-and-collaborate-objectscript-projects-intersystems-iris)
+You can try to use the same dataset; the CSV file is inside the folder ` iris-analytics-package/data`
