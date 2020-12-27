@@ -1,0 +1,10 @@
+<CatalogUI>  
+  <Database name="InterSystems IRIS">    
+    <Query Version="10.0002" height="855" name="COVID19" spaneHeight="265" type="InterSystems IRIS" width="1691" x="460" y="95">      
+      <QueryTable databaseType="InterSystems IRIS" height="231" name="covid19" queryType="COVID19" width="660" x="15" y="15"></QueryTable>    
+    </Query>  
+    <Query Version="10.0002" height="714" name="Find Cities Impacted - Most Change" spaneHeight="265" type="InterSystems IRIS" width="1630" x="460" y="95">
+      <QueryTable databaseType="InterSystems IRIS" height="140" name="city" queryType="Find Cities Impacted - Most Change" width="212" x="15" y="15"></QueryTable>
+    </Query>
+  </Database>
+</CatalogUI>
