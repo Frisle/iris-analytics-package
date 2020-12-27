@@ -100,7 +100,7 @@ Fill in the fields with the server's IP or DNS name, port, namespace, user, and 
 
 You can then add tables, views, and queries to your data source.
 
-![Adding tables(https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/addTableViewQuery.png)
+![Adding tables](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/addTableViewQuery.png)
 
 With your connection information, your tables, views, and/or queries configured, let's move on.
 
@@ -114,7 +114,7 @@ The Table Wizard will guide us by choosing the data source, data display, groupi
 
 ![Table Wizard Data](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/tableWizard_01.png)
 
-I'm using the covid table that Evgeny Shvarov created for the iris-analytics-template to my data source on this report sample. The chosen fields are Confirmed and Deaths.
+I'm using the covid table that [Evgeny Shvarov](https://github.com/evshvarov/csvgen) created for the [iris-analytics-template](https://github.com/intersystems-community/iris-analytics-template) to my data source on this report sample. The chosen fields are Confirmed and Deaths.
 
 ![Table Wizard Display](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/tableWizard_02.png)
 
