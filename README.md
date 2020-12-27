@@ -75,3 +75,71 @@ BTW, the dataset for this demo came from [The Humanitarian Data Exchange - Find,
 ![Import Wizard in action!](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/importWizard.gif)
 
 You can try to use the same dataset; the CSV file is inside the folder ` iris-analytics-package/data`
+
+## InterSystems Reports
+
+### How to set up InterSystems Reports Designer with InterSystems IRIS
+
+I created two simple examples using the InterSystems IRIS + InterSystems reports and will try to share how easy it is to set up these two applications together!
+
+In the next few paragraphs, I describe a step-by-step guide to this process's ease and simplicity.
+
+After installing the Logi Report Designer, open and choose the InterSystems IRIS icon.
+
+![Logi Report Designer](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/LogiReport.png)
+
+For the second step, you have the option of choosing an existing Catalog or creating a new one.
+
+![Catalog](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/Catalog.png)
+
+We will create a new catalog, saving it in your chosen folder, then we will create a new DataSource.
+
+Fill in the fields with the server's IP or DNS name, port, namespace, user, and password.
+
+![Connect](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/reportConnection.png)
+
+You can then add tables, views, and queries to your data source.
+
+![Adding tables(https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/addTableViewQuery.png)
+
+With your connection information, your tables, views, and/or queries configured, let's move on.
+
+Clicking on the icon *New*, choose **New Report**.
+
+For our report, I chose the Table (Group Left) as the image below:
+
+![After Wizard is complete](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/reportType.png)
+
+The Table Wizard will guide us by choosing the data source, data display, grouping, summary, chart, filters, and style.
+
+![Table Wizard Data](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/tableWizard_01.png)
+
+I'm using the covid table that Evgeny Shvarov created for the iris-analytics-template to my data source on this report sample. The chosen fields are Confirmed and Deaths.
+
+![Table Wizard Display](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/tableWizard_02.png)
+
+The group for this report will be Contry_Region.
+
+![Table Wizard Group](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/tableWizard_03.png)
+
+The Summary for Country_Region group will be Confirmed with the Aggregate Function (SUM), the breaking field will be Country_Region in the Footer position.
+
+![Table Wizard Summary](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/tableWizard_04.png)
+
+Inside the chart step, I chose the Bar Chart with Country_Region as my Category and showed values for the Confirmed field.
+
+![Table Wizard Chart](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/tableWizard_05.png)
+
+I'm applying one of the pre-existents styles, and the chosen one was "Classic."
+
+![Table Wizard Style](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/tableWizard_06.png)
+
+The image below shows how the report shows itself after the wizard finish.
+
+![After Wizard is complete](https://raw.githubusercontent.com/diashenrique/iris-analytics-package/master/img/report.png)
+
+The file covid19_cases_-_WorldCount-Sample.pdf (inside the reports folder) it's a "print sample" of the report.
+
+If you want another simple sample, my repo has the file refugees_CitiesImpacted_ReportSample.pdf
+
+Showing the report for the dataset for the [Refugee Admission to the US Ending FY 2018, the dataset is available on Refugee Admission to the US Ending FY 2018 - dataset by associatedpress | data.world](https://data.world/associatedpress/refugee-admissions-to-us-end-fy-2018)
